@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 public class RoleController {
+
     @Autowired
     private RoleRepository roleRepository;
 
@@ -34,7 +35,6 @@ public class RoleController {
                     return roleRepository.save(role);
                 }).orElseThrow(() -> new ResourceNotFoundException("Role not found with Id " + roleId));
     }
-
 
     @DeleteMapping("/roles/{roleId}")
     public ResponseEntity<?> deleteRole(@PathVariable Long roleId) {

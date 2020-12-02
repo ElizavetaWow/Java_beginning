@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 public class SubjectController {
+
     @Autowired
     private SubjectRepository subjectRepository;
 
@@ -34,7 +35,6 @@ public class SubjectController {
                     return subjectRepository.save(subject);
                 }).orElseThrow(() -> new ResourceNotFoundException("Subject not found with Id " + subjectId));
     }
-
 
     @DeleteMapping("/subjects/{subjectId}")
     public ResponseEntity<?> deleteSubject(@PathVariable Long subjectId) {

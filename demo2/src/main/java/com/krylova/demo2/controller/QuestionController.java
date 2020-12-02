@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 public class QuestionController {
+
     @Autowired
     private QuestionRepository questionRepository;
 
@@ -35,7 +36,6 @@ public class QuestionController {
                     return questionRepository.save(question);
                 }).orElseThrow(() -> new ResourceNotFoundException("Question not found with Id " + questionId));
     }
-
 
     @DeleteMapping("/questions/{questionId}")
     public ResponseEntity<?> deleteQuestion(@PathVariable Long questionId) {

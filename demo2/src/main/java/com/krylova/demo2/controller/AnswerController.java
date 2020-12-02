@@ -12,8 +12,10 @@ import java.util.List;
 
 @RestController
 public class AnswerController {
+
     @Autowired
     private AnswerRepository answerRepository;
+
     @Autowired
     private QuestionRepository questionRepository;
 
@@ -45,7 +47,6 @@ public class AnswerController {
                     return answerRepository.save(answer);
                 }).orElseThrow(() -> new ResourceNotFoundException("Answer not found with Id " + answerId));
     }
-
 
     @DeleteMapping("/questions/{questionId}/answers/{answerId}")
     public ResponseEntity<?> deleteAnswer(@PathVariable Long questionId,

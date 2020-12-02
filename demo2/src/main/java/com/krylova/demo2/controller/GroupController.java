@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 public class GroupController {
+
     @Autowired
     private GroupRepository groupRepository;
 
@@ -36,7 +37,6 @@ public class GroupController {
                     return groupRepository.save(group);
                 }).orElseThrow(() -> new ResourceNotFoundException("Group not found with Id " + groupId));
     }
-
 
     @DeleteMapping("/groups/{groupId}")
     public ResponseEntity<?> deleteGroup(@PathVariable Long groupId) {

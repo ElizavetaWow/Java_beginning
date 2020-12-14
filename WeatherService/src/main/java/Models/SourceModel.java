@@ -1,6 +1,6 @@
 package Models;
 
-interface SourceModel {
+public interface SourceModel {
 
     public void parseData();
 

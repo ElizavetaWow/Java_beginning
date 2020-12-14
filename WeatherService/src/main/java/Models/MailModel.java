@@ -35,7 +35,8 @@ public class MailModel implements SourceModel {
 
     @Override
     public String toString() {
-        return "Температура: " + temperature + '\n' +
+        return "Погода Mail.ru сообщает"+'\n'+
+                "Температура: " + temperature + '\n' +
                 "Ветер: " + wind + '\n' +
                 "Влажность: " + humidity + '\n' +
                 "Давление: " + pressure + '\n';

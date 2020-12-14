@@ -37,7 +37,8 @@ public class YandexModel implements SourceModel {
 
     @Override
     public String toString() {
-        return "Температура: " + temperature + '\n' +
+        return "Яндекс.Погода сообщает"+'\n'+
+                "Температура: " + temperature + '\n' +
                 "Ветер: " + wind + '\n' +
                 "Влажность: " + humidity + '\n' +
                 "Давление: " + pressure + '\n';

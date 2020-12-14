@@ -1,33 +1,98 @@
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import Models.MailModel;
+import Models.SourceModel;
+import Models.WorldWeatherModel;
+import Models.YandexModel;
+
+import java.io.IOException;
+import java.util.*;
 
 public class Session {
     private Scanner scan = new Scanner(System.in);
-    private int sourcesNum = 0;
+    private int sourceNum = 1;
+    private String inputLine;
+    private ArrayList<String> commandList = new ArrayList<>
+            (Arrays.asList(new String[] {"help", "quit", "source"}));
+    private ArrayList<String> sources = new ArrayList<>
+            (Arrays.asList(new String[] {"Погода Mail.ru", "Яндекс.Погода", "World Weather"}));
+    private SourceModel source;
+
 
     public Session(){
-        HashMap<String, String> sources = new HashMap<>();
-        sources.put("Погода Mail.ru", "https://pogoda.mail.ru/prognoz/");
-        sources.put("Яндекс.Погода", "https://yandex.ru/pogoda/");
-        sources.put("World Weather", "https://world-weather.ru/pogoda/");
         System.out.println("Добро пожаловать в консольный сервис погоды!");
-        System.out.println("Выберите источник из списка:");
+        getInstructions(false);
+        chooseSource();
+    }
 
-        for (String key: sources.keySet()){
-            sourcesNum++;
-            System.out.println(sourcesNum + ". " + key);
+    public void chooseSource(){
+        System.out.println("Выберите источник из списка:");
+        for (int i = 0; i < sources.size(); i++){
+            System.out.println((i + 1) + ". " + sources.get(i));
         }
         System.out.println("Введите номер источника");
-        try {
-            int a = scan.nextInt();
+        //добавить сохранение в настройки
+        check(true);
+        switch (sourceNum) {
+            case 1:
+                source = new MailModel();
+                break;
+            case 2:
+                source = new YandexModel();
+                break;
+            case 3:
+                source = new WorldWeatherModel();
+                break;
         }
-        catch (
-                InputMismatchException e) {
-            System.out.println("Введен некорректный номер. Попробуйте ещё раз");
+        System.out.println(source.toString());
+        check(false);
+    }
 
+    public void getInstructions(Boolean type){
+        //добавить инструкции про выход, помощь и меню сервисов
+        System.out.println(" inst");
+        if (type){
+            check(false);
         }
     }
 
+    public void check(Boolean type){
+        if (scan.hasNext()) {
+            inputLine = scan.next();
+            if (!type) {
+                if (commandList.contains(inputLine)) {
+                    switch (inputLine) {
+                        case "help":
+                            getInstructions(true);
+                            break;
+                        case "source":
+                            chooseSource();
+                            break;
+                        case "quit":
+                            finish();
+                    }
+                } else {
+                    System.out.println("Введена некорректная команда. Попробуйте ещё раз");
+                    check(false);
+                }
+            }
+            else{
+                try{
+                    if (Integer.parseInt(inputLine) <= sources.size() && 0 < Integer.parseInt(inputLine)){
+                        sourceNum = Integer.parseInt(inputLine);
+                    }
+                    else{
+                        throw new Exception();
+                    }
+                }
+                catch (Exception e){
+                    System.out.println("Введен некорректный номер. Попробуйте ещё раз");
+                    check(true);
+                }
+            }
+        }
+    }
+
+    public void finish(){
+        scan.close();
+    }
 }
 

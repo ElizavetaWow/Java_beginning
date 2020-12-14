@@ -35,7 +35,8 @@ public class WorldWeatherModel implements SourceModel {
 
     @Override
     public String toString() {
-        return "Температура: " + temperature + '\n' +
+        return "World Weather сообщает"+'\n'+
+                "Температура: " + temperature + '\n' +
                 "Ветер: " + wind + '\n' +
                 "Влажность: " + humidity + '\n' +
                 "Давление: " + pressure + '\n';

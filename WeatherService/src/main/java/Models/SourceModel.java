@@ -2,8 +2,8 @@ package Models;
 
 public interface SourceModel {
 
-    public void parseData();
+    void getData();
 
-    public String toString();
+    String toString();
 
 }

@@ -9,7 +9,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="personTableView" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="personTableView" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="firstNameColumn" prefWidth="-1.0" text="FirstName" />
                       <TableColumn fx:id="lastNameColumn" prefWidth="-1.0" text="LastName" />
@@ -53,8 +53,8 @@
                   </GridPane>
                   <HBox layoutX="268.0" layoutY="259.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                      <children>
-                        <Button mnemonicParsing="false" text="New" />
-                        <Button mnemonicParsing="false" text="Edit" />
+                        <Button mnemonicParsing="false" onAction="#handleNewPerson" text="New" />
+                        <Button mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
                         <Button mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
                      </children>
                   </HBox>

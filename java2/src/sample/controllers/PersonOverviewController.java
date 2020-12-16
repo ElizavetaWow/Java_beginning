@@ -32,7 +32,9 @@ public class PersonOverviewController {
     private Label postalCodeLabel;
 
     private Main main;
+
     public PersonOverviewController(){}
+
     @FXML
     private void initialize(){
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
@@ -83,5 +85,26 @@ public class PersonOverviewController {
 
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleEditPerson(){
+        int selectionIndex = personTableView.getSelectionModel().getSelectedIndex();
+        if (selectionIndex >= 0)
+            main.showEditForm(personTableView.getSelectionModel().getSelectedItem());
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(main.getPrimaryStage());
+            alert.setTitle("No selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleNewPerson(){
+        main.showEditForm(null);
     }
 }

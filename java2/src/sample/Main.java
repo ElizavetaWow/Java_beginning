@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.controllers.EditFormController;
 import sample.controllers.PersonOverviewController;
 import sample.models.Person;
 
@@ -21,12 +21,8 @@ public class Main extends Application {
 
     public Main(){
         for(int i=0; i<35; i++){
-            personData.add(new Person("Имя"+Integer.toString(i), "Фамилия"+Integer.toString(i)));
+            personData.add(new Person("Имя"+ i, "Фамилия"+ i));
         }
-    }
-
-    public ObservableList<Person> getPersonData() {
-        return personData;
     }
 
     @Override
@@ -63,6 +59,20 @@ public class Main extends Application {
         }
     }
 
+    public void showEditForm(Person person){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/editScene.fxml"));
+            AnchorPane editForm = (AnchorPane) loader.load();
+            rootLayout.setCenter(editForm);
+            EditFormController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setPerson(person);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Stage getPrimaryStage(){
         return primaryStage;
     }
@@ -70,4 +80,13 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public void setPersonData(ObservableList<Person> personData) {
+        this.personData = personData;
+    }
+
+    public ObservableList<Person> getPersonData() {
+        return personData;
+    }
+
 }

@@ -23,6 +23,8 @@ public class Person {
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(2001, 6, 28));
     }
 
+    public Person(){}
+
     public String getFirstName() {
         return firstName.get();
     }
@@ -72,26 +74,26 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+        this.firstName = new SimpleStringProperty(firstName);
     }
 
     public void setLastName(String lastName) {
-        this.lastName.set(lastName);
+        this.lastName = new SimpleStringProperty(lastName);
     }
 
     public void setStreet(String street) {
-        this.street.set(street);
+        this.street = new SimpleStringProperty(street);
     }
 
     public void setCity(String city) {
-        this.city.set(city);
+        this.city = new SimpleStringProperty(city);
     }
 
     public void setPostalCode(int postalCode) {
-        this.postalCode.set(postalCode);
+        this.postalCode = new SimpleIntegerProperty(postalCode);
     }
 
     public void setBirthday(LocalDate birthday) {
-        this.birthday.set(birthday);
+        this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
     }
 }

@@ -40,6 +40,8 @@ public class PersonOverviewController {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().getLastNameProperty());
 
+        personTableView.setItems(Main.GeneratePersons());
+
         showPersonalDetails(null);
         personTableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue )-> showPersonalDetails(newValue)
@@ -89,15 +91,19 @@ public class PersonOverviewController {
 
     @FXML
     private void handleEditPerson(){
-        int selectionIndex = personTableView.getSelectionModel().getSelectedIndex();
-        if (selectionIndex >= 0)
-            main.showEditForm(personTableView.getSelectionModel().getSelectedItem());
-        else {
+        Person selectedPerson = personTableView.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            boolean okClicked = main.showPersonEditDialog(selectedPerson);
+            if (okClicked) {
+                showPersonalDetails(selectedPerson);
+            }
+
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(main.getPrimaryStage());
-            alert.setTitle("No selection");
+            alert.setTitle("No Selection");
             alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table");
+            alert.setContentText("Please select a person in the table.");
 
             alert.showAndWait();
         }
@@ -105,6 +111,10 @@ public class PersonOverviewController {
 
     @FXML
     private void handleNewPerson(){
-        main.showEditForm(null);
+        Person tempPerson = new Person();
+        boolean okClicked = main.showPersonEditDialog(tempPerson);
+        if (okClicked) {
+            main.getPersonData().add(tempPerson);
+        }
     }
 }

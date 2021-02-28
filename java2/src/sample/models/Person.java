@@ -20,10 +20,12 @@ public class Person {
         this.street = new SimpleStringProperty("улица");
         this.city = new SimpleStringProperty("город");
         this.postalCode = new SimpleIntegerProperty(1234);
-        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(2001, 6, 28));
+        this.birthday = new SimpleObjectProperty<>(LocalDate.of(2001, 6, 28));
     }
 
-    public Person(){}
+    public Person(){
+        this(null, null);
+    }
 
     public String getFirstName() {
         return firstName.get();
@@ -94,6 +96,6 @@ public class Person {
     }
 
     public void setBirthday(LocalDate birthday) {
-        this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
+        this.birthday = new SimpleObjectProperty<>(birthday);
     }
 }

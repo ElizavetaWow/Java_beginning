@@ -33,7 +33,9 @@ public class PersonOverviewController {
 
     private Main main;
 
-    public PersonOverviewController(){}
+    public PersonOverviewController(){
+        private String URL = "http://localhost:8080/api/persons";
+    }
 
     @FXML
     private void initialize(){
